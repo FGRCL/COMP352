@@ -1,46 +1,34 @@
 
 public class Tree<E extends Comparable<E>> {
-	private class Node<E extends Comparable<E>>{
-		private E element;
-		private Node<E> left;
-		private Node<E> right;
-		
-		public Node() {
-			element = null;
-			left = null;
-			right = null;
-		}
-		
-		public Node(E value) {
-			element = value;
-			left = null;
-			right = null;
-		}
-		
-		public Node(E value, Node left, Node right) {
-			element = value;
-			this.left = left;
-			this.right = right;
-		}	
-		
-	}
-	private Node<E> root;
+	
+	protected Node<E> root;
 	
 	public Tree() {
 		root = null;
 	}
 	
 	public void insert(E elem) {
-		insert(root, elem);
+		if(root == null) {
+			root = new Node<E>(elem);
+		}else {
+			insert(root, elem);
+		}
+		
 	}
 	
 	private void insert(Node<E> curr, E elem) {
-		if(curr == null) {
-			curr = new Node<E>(elem);
-		}else if(curr.element.compareTo(elem)>1) {
-			insert(curr.left, elem);
-		}else if(curr.element.compareTo(elem)<1) {
-			insert(curr.right, elem);
+		if(curr.getElement().compareTo(elem)>0) {
+			if(curr.getLeft() == null) {		
+				curr.setLeft(new Node<E>(elem));
+			}else {
+				insert(curr.getLeft(), elem);
+			}		
+		}else if(curr.getElement().compareTo(elem)<0) {
+			if(curr.getRight() == null) {
+				curr.setRight(new Node<E>(elem));
+			}else {
+				insert(curr.getRight(), elem);
+			}
 		}
 	}
 	
@@ -48,11 +36,26 @@ public class Tree<E extends Comparable<E>> {
 		printInorder(root);
 	}
 	
-	public void printInorder(Node curr) {
+	public void printInorder(Node<E> curr) {
 		if(curr !=null) {
-			printInorder(curr.left);
-			System.out.println(curr.element);
-			printInorder(curr.right);
+			printInorder(curr.getLeft());
+			System.out.println(curr.getElement());
+			printInorder(curr.getRight());
 		}
+	}
+	
+	public void printTree(Node<E> curr, int depth) {
+		int nextLevel = depth + 1;
+		if(curr.getRight() != null) printTree(curr.getRight(), nextLevel);
+		for(int i=0; i<depth; i++) {
+			System.out.print("\t");
+		}
+		System.out.println(curr.getElement());
+		if(curr.getLeft() != null) printTree(curr.getLeft(), nextLevel);
+		
+	}
+	
+	public void printTree() {
+		printTree(root, 0);
 	}
 }

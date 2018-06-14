@@ -1,3 +1,5 @@
-/Tree$Node.class
-/Tree.class
-/Test.class
+/Node.class
+/WeightedLeafNode.class
+/HuffmanTree.class
+/CharacterHash.class
+/Huffman.class
