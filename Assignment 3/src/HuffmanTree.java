@@ -7,4 +7,5 @@ public class HuffmanTree extends Tree<Integer>{
 		return root;
 	}
 	
+	
 }

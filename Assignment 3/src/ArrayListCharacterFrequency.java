@@ -23,7 +23,7 @@ public class ArrayListCharacterFrequency {
 	private void push(char character) {
 		size++;
 		characters[size] = character;
-		frequencies[size] = 0;
+		frequencies[size] = 1;
 	}
 	
 	public WeightedLeafNode popToNode() {
@@ -46,20 +46,33 @@ public class ArrayListCharacterFrequency {
 			frequency = frequencies[i];
 			insertIndex=0;
 			for(int j=i-1; j>=0; j--) {
-				if(charToSort>characters[j]) {
+				if(frequency>=frequencies[j]) {
 					insertIndex=j+1;
 					break;
 				}
 			}
-			for(int k = insertIndex; k>=i-1; k--) {
+			for(int k = i-1; k>=insertIndex; k--) {
 				characters[k+1] = characters[k];
 			}
 			characters[insertIndex] = charToSort;
-			for(int k = insertIndex; k>=i-1; k--) {
+			for(int k = i-1; k>=insertIndex; k--) {
 				frequencies[k+1] = frequencies[k];
 			}
 			frequencies[insertIndex] = frequency;
 		}
+	}
+	
+	public String toString() {
+		String string = "";
+		string += "Character:\t";
+		for(int i=0; i<=size; i++) {
+			string += characters[i]+"\t";
+		}
+		string += "\nFrequencies:\t";
+		for(int i=0; i<=size; i++) {
+			string += frequencies[i]+"\t";
+		}
+		return string;
 	}
 }
 
