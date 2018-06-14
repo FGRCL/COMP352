@@ -4,6 +4,12 @@ public class ArrayListCharacterFrequency {
 	int[] frequencies;
 	int size;
 	
+	public ArrayListCharacterFrequency() {
+		characters = new char[255];
+		frequencies = new int[255];
+		size = -1;
+	}
+	
 	public ArrayListCharacterFrequency(int length) {
 		characters = new char[length];
 		frequencies = new int[length];
@@ -46,7 +52,7 @@ public class ArrayListCharacterFrequency {
 			frequency = frequencies[i];
 			insertIndex=0;
 			for(int j=i-1; j>=0; j--) {
-				if(frequency>=frequencies[j]) {
+				if(frequency>frequencies[j]) {
 					insertIndex=j+1;
 					break;
 				}

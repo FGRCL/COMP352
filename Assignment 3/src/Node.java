@@ -35,4 +35,8 @@ public class Node<E> {
 	public E getElement() {
 		return element;
 	}
+	
+	public boolean isLeaf() {
+		return (left == null && right == null);
+	}
 }

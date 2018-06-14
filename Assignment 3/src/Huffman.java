@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Huffman {
 	public static void main(String[] args) {
 		Scanner file = null;
-		ArrayListCharacterFrequency characterFrequency = new ArrayListCharacterFrequency(255);
+		ArrayListCharacterFrequency characterFrequency = new ArrayListCharacterFrequency();
 		try {
 			System.out.println("Start reading from: "+args[0]);
 			file = new Scanner( new File(args[0]));
@@ -18,7 +18,6 @@ public class Huffman {
 			e.printStackTrace();
 		} 
 		characterFrequency.sort();
-		System.out.println(characterFrequency);
 		NodePriorityQueue nodes = new NodePriorityQueue();
 		while(!characterFrequency.isEmpty()) {
 			nodes.push(characterFrequency.popToNode());
@@ -26,8 +25,16 @@ public class Huffman {
 		HuffmanTree huffmanTree = new HuffmanTree();
 		while(nodes.getLength()>1) {
 			nodes.insert(huffmanTree.merge(nodes.pop(), nodes.pop()));
-			System.out.println(nodes);
 		}
-		huffmanTree.printTree();
+		CharacterEncodingHash encodings = huffmanTree.createHash();		
+		System.out.println(encodings);
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter a line to encode: ");
+		String toEncode = input.nextLine();
+		String encoded = "";
+		for(int i=0; i<toEncode.length(); i++) {
+			encoded += encodings.get(toEncode.charAt(i));
+		}
+		System.out.println("Encoded line: "+encoded);
 	}
 }

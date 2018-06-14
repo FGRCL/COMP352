@@ -45,7 +45,7 @@ public class NodePriorityQueue {
 		ListNode curr = head;
 		ListNode prev = null;
 		while(curr != null) {
-			if(element.getElement() <= curr.element.getElement()) {
+			if(element.getElement() < curr.element.getElement()) {
 				if(prev == null) {
 					push(element);
 				}else{
@@ -53,6 +53,7 @@ public class NodePriorityQueue {
 					prev.next = listNode;
 					length++;
 				}
+				
 				return;
 			}
 			prev = curr;
@@ -79,6 +80,18 @@ public class NodePriorityQueue {
 		String string = "\t\t";
 		ListNode curr = head;
 		while(curr != null) {
+			string += curr.element.getElement()+"\t";
+			curr = curr.next;
+		}
+		string += "length: "+length;
+		return string;
+	}
+	
+	public String debugPrint(ListNode newly) {
+		String string = "\t\t";
+		ListNode curr = head;
+		while(curr != null) {
+			if(newly.equals(curr)) string += "new: ";
 			string += curr.element.getElement()+"\t";
 			curr = curr.next;
 		}

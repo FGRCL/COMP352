@@ -7,5 +7,19 @@ public class HuffmanTree extends Tree<Integer>{
 		return root;
 	}
 	
+	public CharacterEncodingHash createHash() {
+		CharacterEncodingHash hash = new CharacterEncodingHash();
+		createHash(root, "", hash);
+		return hash;
+	}
 	
+	private void createHash(Node<Integer> curr, String encoding, CharacterEncodingHash hash) {
+		if(curr.isLeaf()) {
+			WeightedLeafNode leaf = (WeightedLeafNode) curr;
+			hash.insert(leaf.getCharacter(), encoding);
+		}else {
+			createHash(curr.getLeft(), encoding+="0", hash);
+			createHash(curr.getRight(), encoding+="1", hash);
+		}
+	}
 }
