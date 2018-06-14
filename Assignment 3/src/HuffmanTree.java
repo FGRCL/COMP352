@@ -18,8 +18,8 @@ public class HuffmanTree extends Tree<Integer>{
 			WeightedLeafNode leaf = (WeightedLeafNode) curr;
 			hash.insert(leaf.getCharacter(), encoding);
 		}else {
-			createHash(curr.getLeft(), encoding+="0", hash);
-			createHash(curr.getRight(), encoding+="1", hash);
+			createHash(curr.getLeft(), encoding+"0", hash);
+			createHash(curr.getRight(), encoding+"1", hash);
 		}
 	}
 }

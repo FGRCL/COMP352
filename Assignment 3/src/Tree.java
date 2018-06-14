@@ -7,27 +7,27 @@ public class Tree<E extends Comparable<E>> {
 		root = null;
 	}
 	
-	public void insert(E elem) {
+	public void add(E elem) {
 		if(root == null) {
 			root = new Node<E>(elem);
 		}else {
-			insert(root, elem);
+			add(root, elem);
 		}
 		
 	}
 	
-	private void insert(Node<E> curr, E elem) {
+	private void add(Node<E> curr, E elem) {
 		if(curr.getElement().compareTo(elem)>0) {
 			if(curr.getLeft() == null) {		
 				curr.setLeft(new Node<E>(elem));
 			}else {
-				insert(curr.getLeft(), elem);
+				add(curr.getLeft(), elem);
 			}		
 		}else if(curr.getElement().compareTo(elem)<0) {
 			if(curr.getRight() == null) {
 				curr.setRight(new Node<E>(elem));
 			}else {
-				insert(curr.getRight(), elem);
+				add(curr.getRight(), elem);
 			}
 		}
 	}

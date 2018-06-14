@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Huffman {
@@ -16,7 +17,9 @@ public class Huffman {
 			}		
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} 
+		} finally {
+			file.close();
+		}
 		characterFrequency.sort();
 		NodePriorityQueue nodes = new NodePriorityQueue();
 		while(!characterFrequency.isEmpty()) {
@@ -28,13 +31,30 @@ public class Huffman {
 		}
 		CharacterEncodingHash encodings = huffmanTree.createHash();		
 		System.out.println(encodings);
-		Scanner input = new Scanner(System.in);
-		System.out.print("Enter a line to encode: ");
-		String toEncode = input.nextLine();
-		String encoded = "";
-		for(int i=0; i<toEncode.length(); i++) {
-			encoded += encodings.get(toEncode.charAt(i));
+		Scanner input = null;
+		PrintWriter output = null;
+		try {
+			output = new PrintWriter("EncodedStrings.txt");
+			input = new Scanner(new File("RandomStrings.txt"));
+			input.useDelimiter("\t");
+			String toEncode;
+			String encoded;
+			int ID;
+			while(input.hasNext()) {
+				ID = Integer.parseInt(input.next());
+				toEncode = input.nextLine().substring(1);
+				encoded = ID+"\t";
+				for(int i=0; i<toEncode.length(); i++) {
+					encoded += encodings.get(toEncode.charAt(i));
+				}
+				output.write(encoded+"\n");
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			input.close();
+			output.close();
 		}
-		System.out.println("Encoded line: "+encoded);
 	}
 }

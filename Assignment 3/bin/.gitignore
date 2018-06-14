@@ -1,11 +1,11 @@
-/CharacterHash.class
+/ArrayListCharacterFrequency.class
+/CharacterEncodingHash.class
 /Huffman.class
 /HuffmanTree.class
 /Node.class
+/NodePriorityQueue$ListNode.class
+/NodePriorityQueue.class
 /Test.class
 /Tree.class
 /WeightedLeafNode.class
-/CharacterEncodingHash.class
-/ArrayListCharacterFrequency.class
-/NodePriorityQueue.class
-/NodePriorityQueue$ListNode.class
+/SplayTree.class
