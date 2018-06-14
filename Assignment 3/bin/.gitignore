@@ -1,5 +1,11 @@
-/Node.class
-/WeightedLeafNode.class
-/HuffmanTree.class
 /CharacterHash.class
 /Huffman.class
+/HuffmanTree.class
+/Node.class
+/Test.class
+/Tree.class
+/WeightedLeafNode.class
+/CharacterEncodingHash.class
+/ArrayListCharacterFrequency.class
+/NodePriorityQueue.class
+/NodePriorityQueue$ListNode.class
