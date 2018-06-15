@@ -45,15 +45,14 @@ public class NodePriorityQueue {
 		ListNode curr = head;
 		ListNode prev = null;
 		while(curr != null) {
-			if(element.getElement() < curr.element.getElement()) {
+			if(element.getElement() <= curr.element.getElement()) {
 				if(prev == null) {
 					push(element);
 				}else{
 					ListNode listNode = new ListNode(element, curr);
 					prev.next = listNode;
 					length++;
-				}
-				
+				}		
 				return;
 			}
 			prev = curr;

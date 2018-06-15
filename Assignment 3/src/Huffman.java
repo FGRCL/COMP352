@@ -1,14 +1,13 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Huffman {
 	public static void main(String[] args) {
+		//get the frequency of characters
 		Scanner file = null;
 		ArrayListCharacterFrequency characterFrequency = new ArrayListCharacterFrequency();
 		try {
-			System.out.println("Start reading from: "+args[0]);
 			file = new Scanner( new File(args[0]));
 			file.useDelimiter("");
 			while(file.hasNext()) {
@@ -21,40 +20,32 @@ public class Huffman {
 			file.close();
 		}
 		characterFrequency.sort();
+		
+		//build the priority queue of nodes
 		NodePriorityQueue nodes = new NodePriorityQueue();
 		while(!characterFrequency.isEmpty()) {
 			nodes.push(characterFrequency.popToNode());
 		}
+		
+		//build the HuffmanTree
 		HuffmanTree huffmanTree = new HuffmanTree();
 		while(nodes.getLength()>1) {
 			nodes.insert(huffmanTree.merge(nodes.pop(), nodes.pop()));
 		}
+		
+		//create the encoding table
 		CharacterEncodingHash encodings = huffmanTree.createHash();		
-		System.out.println(encodings);
 		Scanner input = null;
-		PrintWriter output = null;
-		try {
-			output = new PrintWriter("EncodedStrings.txt");
-			input = new Scanner(new File("RandomStrings.txt"));
-			input.useDelimiter("\t");
-			String toEncode;
-			String encoded;
-			int ID;
-			while(input.hasNext()) {
-				ID = Integer.parseInt(input.next());
-				toEncode = input.nextLine().substring(1);
-				encoded = ID+"\t";
-				for(int i=0; i<toEncode.length(); i++) {
-					encoded += encodings.get(toEncode.charAt(i));
-				}
-				output.write(encoded+"\n");
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			input.close();
-			output.close();
+		
+		//get input to encode
+		input = new Scanner(System.in);
+		String toEncode;
+		String encoded = "";
+		toEncode = input.nextLine();
+		for(int i=0; i<toEncode.length(); i++) {
+			encoded += encodings.get(toEncode.charAt(i));
 		}
+		input.close();
+		System.out.println(encoded);
 	}
 }
