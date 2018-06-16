@@ -44,6 +44,21 @@ public class Tree<E extends Comparable<E>> {
 		}
 	}
 	
+	public String postorder() {
+		return postorder(root);
+	}
+	
+	private String postorder(Node<E> curr) {
+		if(curr != null) {
+			if(curr.equals(root)) {
+				return postorder(curr.getLeft()) + postorder(curr.getRight()) + curr.getElement();
+			}else {
+				return postorder(curr.getLeft()) + postorder(curr.getRight()) + curr.getElement()+",";
+			}
+		}
+		return"";
+	}
+	
 	public void printTree(Node<E> curr, int depth) {
 		int nextLevel = depth + 1;
 		if(curr.getRight() != null) printTree(curr.getRight(), nextLevel);
