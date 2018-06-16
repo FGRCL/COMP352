@@ -53,6 +53,10 @@ public class Node<E> {
 		return element;
 	}
 	
+	public void setElement(E element) {
+		this.element = element;
+	}
+	
 	public boolean isLeaf() {
 		return (left == null && right == null);
 	}
