@@ -20,12 +20,14 @@ public class Huffman {
 			file.close();
 		}
 		characterFrequency.sort();
+		System.out.println(characterFrequency);
 		
 		//build the priority queue of nodes
 		NodePriorityQueue nodes = new NodePriorityQueue();
 		while(!characterFrequency.isEmpty()) {
 			nodes.push(characterFrequency.popToNode());
 		}
+		
 		
 		//build the HuffmanTree
 		HuffmanTree huffmanTree = new HuffmanTree();
@@ -36,6 +38,7 @@ public class Huffman {
 		//create the encoding table
 		CharacterEncodingHash encodings = huffmanTree.createHash();		
 		Scanner input = null;
+		System.out.println(encodings);
 		
 		//get input to encode
 		input = new Scanner(System.in);

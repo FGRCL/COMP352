@@ -8,11 +8,16 @@ public class SplayTree<E extends Comparable<E>> extends Tree<E>{
 		Scanner operations = null;
 		try {
 			operations = new Scanner(new File(args[0]));
-			int displayNb = Integer.parseInt(args[1]);
+			int displayNb = 0;
+			boolean allowDebug = false;
+			if(args.length > 1) {
+				displayNb = Integer.parseInt(args[1]);
+				allowDebug = true;
+			}
 			SplayTree<Integer> tree = new SplayTree<Integer>();
 			int count = 0;
 			while(operations.hasNext()) {
-				if(count == displayNb) {
+				if(count == displayNb && allowDebug) {
 					System.out.println("Traversal at "+count+": "+tree.postorder());
 					System.out.println(tree.getCompares()+" compares");
 					System.out.println(tree.getZigzig()+" Zig-zigs");
@@ -34,6 +39,7 @@ public class SplayTree<E extends Comparable<E>> extends Tree<E>{
 				}
 				count++;
 			}
+			System.out.println(tree.postorder());
 			operations.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
